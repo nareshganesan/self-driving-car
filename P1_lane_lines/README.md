@@ -27,23 +27,34 @@ Algorithm:
     1. Convert the image to gray scale
     2. blurring the images to get better edges - Gaussian blur
     3. Apply canny edge detector to get edges detected
-    4. Apply hough transformation to get lines
-    5. Filter lines using the median value of the images on left and right lanes
-        i. identify left and right lanes using simple linear algebra line slope
-    6. draw lane lines on the image
-    7. Create a mask image with lanes - narrowing down the lane lines only to the region of interest
-    8. Create weighted lines plus original image
+    4. Create a mask image with lanes - narrowing down the lane lines only to the region of interest
+    5. Apply hough transformation to get lines
+    6. Filter lines
+        i. identify left and right lanes using simple linear algebra
+            using mid point of image and min & max allowed slope within left and right side of the point of view.
+    7. create left and right lanes using numpy polyfit function
+    8.  i. find intersection point of right and left lanes using numpy linear algebra function
+    9.  ii. add the line segment to buffer
+    10. draw the lines on the images
 ```
+
+sample outputs:
+
+<img src="test_images_output/solidWhiteCurve.jpg" width="480" alt="solidWhiteCurve" />
+
+<img src="test_images_output/solidWhiteRight.jpg" width="480" alt="solidWhiteRight" />
+
+<img src="test_images_output/solidYellowCurve.jpg" width="480" alt="solidYellowCurve" />
+
+<img src="test_images_output/solidYellowCurve2.jpg" width="480" alt="solidYellowCurve2" />
+
+<img src="test_images_output/solidYellowLeft.jpg" width="480" alt="solidYellowLeft" />
+
+<img src="test_images_output/whiteCarLaneSwitch.jpg" width="480" alt="whiteCarLaneSwitch" />
 
 2. Identify any shortcomings
 
-```
-Some of the shortcomings, I felt could be addressed are listed below.
-    1. Smooth averaging of lane lines
-    2. Way to adjust lane lines in case of curved roads
-    3. Way to address lane lines in bad lights
-    4. Way to address lane lines on bad roads with no proper markers
-```
+The current pipeline has problems in case of bad lighting and curved roads. Also the intersection points and lanes lines are misaligned drastically during begining of the video.
 
 3. Suggest possible improvements
 
