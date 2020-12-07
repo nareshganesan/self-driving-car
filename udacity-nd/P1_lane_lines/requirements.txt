@@ -1,7 +1,7 @@
 jupyter==1.0.0
 jupyterlab==2.2.9
 pandas==0.22.0
-pillow==5.0.0
+pillow==7.1.0
 aiofiles==0.4.0
 delegator-py==0.1.1
 fastapi==0.35.0
@@ -20,4 +20,4 @@ setuptools==41.0.1
 tb-nightly==1.15.0a20190813
 tensorboardX==1.8
 tqdm==4.33.0
-uvicorn==0.8.6
+uvicorn==0.11.7
