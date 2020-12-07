@@ -19,8 +19,9 @@ RUN apt update && apt upgrade -y && \
   libatlas-base-dev gfortran && cd /usr/include/linux && \
   ln -s -f ../libv4l1-videodev.h videodev.h && \
   pip3 install -U pip numpy && \
-  pip3 install virtualenv virtualenvwrapper \
-  matplotlib scipy scikit-learn && \
+  pip3 install virtualenv virtualenvwrapper matplotlib scipy scikit-learn \
+  torch==1.7.0+cu101 torchvision==0.8.1+cu101 torchaudio==0.7.0 \
+  -f https://download.pytorch.org/whl/torch_stable.html && \
   echo "Create a virtual environtment for the python binding module" && \
   echo 'export WORKON_HOME=$HOME/.virtualenvs' >> ~/.bashrc && \
   echo 'export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3' >> ~/.bashrc && \
