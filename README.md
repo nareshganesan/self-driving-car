@@ -2,14 +2,29 @@
 
 Self driving car nano degree projects
 
-| Task        |          Name           |
-| ----------- | :---------------------: |
-| [Project 1] | [Find lane lines basic] |
+| Task        |            Name            |
+| ----------- | :------------------------: |
+| [Project 1] |  [Find lane lines basic]   |
+| [Project 2] | [Find lane lines advanced] |
 
-[project 1]: https://github.com/nareshganesan/self-driving-car/tree/main/udacity-nd/P1_lane_lines
-[find lane lines basic]: https://github.com/nareshganesan/self-driving-car/tree/main/udacity-nd/P1_lane_lines
+[project 1]: https://github.com/nareshganesan/self-driving-car/tree/main/udacity-nd/p1-finding-lane-lines
+[find lane lines basic]: https://github.com/nareshganesan/self-driving-car/tree/main/udacity-nd/p1-finding-lane-lines
+[project 1]: https://github.com/nareshganesan/self-driving-car/tree/main/udacity-nd/p2-advanced-lane-lines
+[find lane lines advanced]: https://github.com/nareshganesan/self-driving-car/tree/main/udacity-nd/p2-advanced-lane-lines
 
-### development setup
+### development host setup
+
+```bash
+# dependencies NVIDIA driver, CUDA 10.1
+# python pip virtualenv
+pip install -r requirements.txt
+
+# Jupyter lab extensions
+jupyter labextension install @aquirdturtle/collapsible_headings
+jupyter labextension install @lckr/jupyterlab_variableinspector
+```
+
+### development docker setup
 
 ```bash
 # give docker group access to x server for display
