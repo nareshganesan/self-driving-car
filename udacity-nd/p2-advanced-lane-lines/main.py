@@ -50,8 +50,7 @@ def apply_video(input_video, output_video):
     clip1 = VideoFileClip(input_video)
     white_clip = clip1.fl_image(process_image)
     white_clip.write_videofile(output_video, audio=False)
-    
-    print("Apply video pipeline: SUCCESS!")
+    print("Video pipeline: SUCCESS!")
 
 
 # test images
