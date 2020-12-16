@@ -9,7 +9,7 @@ Self driving car nano degree projects
 
 [project 1]: https://github.com/nareshganesan/self-driving-car/tree/main/udacity-nd/p1-finding-lane-lines
 [find lane lines basic]: https://github.com/nareshganesan/self-driving-car/tree/main/udacity-nd/p1-finding-lane-lines
-[project 1]: https://github.com/nareshganesan/self-driving-car/tree/main/udacity-nd/p2-advanced-lane-lines
+[project 2]: https://github.com/nareshganesan/self-driving-car/tree/main/udacity-nd/p2-advanced-lane-lines
 [find lane lines advanced]: https://github.com/nareshganesan/self-driving-car/tree/main/udacity-nd/p2-advanced-lane-lines
 
 ### development host setup
