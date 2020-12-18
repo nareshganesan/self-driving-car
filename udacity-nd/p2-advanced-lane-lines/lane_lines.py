@@ -2,16 +2,20 @@ from helper import *
 
 
 class Pipeline:
-    def __init__(self, cal_path, nx, ny, debug=False):
+    def __init__(self, cal_path, nx, ny, debug=False, output_path="./output_images/"):
         self.debug = debug
         self.mtx, self.dist = camera_calibration(cal_path, nx, ny, debug)        
         self.lines_fit = None
         self.left_points = []
         self.right_points = []
+        self.output_path = output_path
+        self.count = 0
 
     def __call__(self, image):
+        self.count += 1
         mask = thresholded_mask(image, self.mtx, self.dist, self.debug)
         if self.debug == True:
+            write_images_to_folder([mask], [f"thresholded_mask{self.count}.jpg"], self.output_path)
             plot_result([image, mask], ['image', 'mask'], rows=1, cols=2)
 
         # region of interest coordinates

@@ -14,12 +14,12 @@ The goals / steps of this project are the following:
 - Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
 [//]: # "Image References"
-[image1]: ./examples/undistort_output.png "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
+[image1]: ./output_images/calibration_output10.jpg "Undistorted"
+[image2]: ./output_images/undistorted.jpg "Undistorted"
+[image3]: ./output_images/thresholded_mask6.jpg "Binary thresholded mask"
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./output_images/test1.jpg "Output"
+[image6]: ./output_images/test6.jpg "Output"
 [video1]: ./project_video_output.mp4 "Video"
 [//]: # "References"
 [camera calibration]: https://github.com/nareshganesan/self-driving-car/blob/main/udacity-nd/p2-advanced-lane-lines/helper.py#L150 "Camera calibration"
@@ -104,14 +104,12 @@ This resulted in the following source and destination points:
 | 725, 460  |   1065, 0   | # Top right |
 | 1125, 700 |  1065, 720  | # Bottom right |
 
-![alt text][image4]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 I use the following functions [find_lane_pixels] and [fit_polynomial] to identify lane line pixels using histogram and sliding window approach.
 Results of lane pixels are used to fit a polynomial line.
 
-![alt text][image5]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -138,3 +136,5 @@ Here's a [link to my video result](./project_video_output.mp4)
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project. Where will your pipeline likely fail? What could you do to make it more robust?
 
 My solution works well on the project video but fails badly on the challenge and harder challenge videos. I believe the feature selection of the thresholded binary image is the one of the main source of failure. I will be playing more with colors, sobel operators and threshold to be robust on different road conditions.
+
+Output images for test images have been placed in output_images folder in project root.

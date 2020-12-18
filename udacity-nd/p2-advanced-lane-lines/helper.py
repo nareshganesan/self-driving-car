@@ -77,7 +77,7 @@ def create_video_from_frames(images, filename, codec="MJPG"):
 
 def write_images_to_folder(images, image_names, file_path):
     '''
-    writes the list of RGB images to file
+    writes the list of RGB / Grayscale / Binary images to file
     Args:
         images - list of RGB channel images
         image_names - list of names for images
@@ -87,7 +87,15 @@ def write_images_to_folder(images, image_names, file_path):
     '''
     count = 0
     for name, image in zip(image_names, images):
-        cv2.imwrite(file_path + name, cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
+        if len(image.shape) > 2:
+            # RGB image
+            cv2.imwrite(file_path + name, cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
+        elif np.unique(image).tolist() == [0, 1]:
+            # binary image
+            cv2.imwrite(file_path + name, image * 255)
+        else:
+            # grayscale image
+            cv2.imwrite(file_path + name, image)
         count += 1
     return len(images) == count
 
@@ -147,7 +155,7 @@ def channels(image, debug=False):
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-def camera_calibration(images_path=None, nx=8, ny=6, debug=False):
+def camera_calibration(images_path=None, nx=8, ny=6, debug=False, output_path="./output_images/"):
     '''
     Given calibration chessboard images, Returns camera matrix and distortion coefficients
     Args:
@@ -183,9 +191,12 @@ def camera_calibration(images_path=None, nx=8, ny=6, debug=False):
     cols = 4
     if debug == True:
         # plot_result(images, names, rows=rows, cols=cols)
+        count = 1
         for name, img in zip(names, images):
+            write_images_to_folder([img], [f"calibration_output{count}.jpg"], output_path)
             cv2.imshow('calibrationTesting', img)
             cv2.waitKey(0)
+            count += 1
         cv2.destroyAllWindows()
     # calibrate camera
     ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(
@@ -264,7 +275,7 @@ def sobel(image, gray, sx=False, sy=False, kernel=5, thresh_min=0, thresh_max=25
         plot_result([image, rx_sobel, rx_binary], ['image', 'channel', 'binary'], rows=1, cols=3)
     return binary
 
-def thresholded_mask(image, mtx, dist, debug=False):
+def thresholded_mask(image, mtx, dist, debug=False, output_path="./output_images/"):
     '''
     thresholded binary image using sobel x on rgb, hls color space and sobel direction
     Args:
@@ -277,6 +288,8 @@ def thresholded_mask(image, mtx, dist, debug=False):
     '''
     # undistory image
     undistorted = undistort(image, mtx, dist, debug)
+    if debug == True:
+        write_images_to_folder([undistorted], [f"undistorted.jpg"], output_path)
     # apply gaussian blur
     blurred = gaussian_blur(undistorted, kernel=3, debug=debug)
     # sobel x for rgb gray scale image
