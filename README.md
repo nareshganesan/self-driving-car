@@ -15,6 +15,24 @@ Self driving car nano degree projects
 ### development host setup
 
 ```bash
+# install pyenv
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+
+# add bash exports
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+
+# install python 3.7.2
+pyenv install 3.7.2
+
+# install self driving car virtualenv
+pyenv virtualenv udSelfDriving
+
+# activate environment
+pyenv activate udSelfDriving
+
 # dependencies NVIDIA driver, CUDA 10.1
 # python pip virtualenv
 pip install -r requirements.txt
