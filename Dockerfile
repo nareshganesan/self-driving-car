@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-devel-ubuntu18.04
+FROM nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 LABEL maintainer "nareshkumarganesan@gmail.com"
 
 RUN apt update && apt upgrade -y && \
@@ -19,7 +19,8 @@ RUN apt update && apt upgrade -y && \
   libatlas-base-dev gfortran && cd /usr/include/linux && \
   ln -s -f ../libv4l1-videodev.h videodev.h && \
   pip3 install -U pip numpy && \
-  pip3 install virtualenv virtualenvwrapper matplotlib scipy scikit-learn \
+  pip3 install virtualenv virtualenvwrapper \
+  matplotlib scipy scikit-learn \
   torch==1.7.0+cu101 torchvision==0.8.1+cu101 torchaudio==0.7.0 \
   -f https://download.pytorch.org/whl/torch_stable.html && \
   echo "Create a virtual environtment for the python binding module" && \
@@ -65,6 +66,16 @@ RUN apt update && apt upgrade -y && \
   torchvision==0.8.1+cu101 \
   torchaudio==0.7.0 \
   -f https://download.pytorch.org/whl/torch_stable.html \
+  && cd / \
+  && git clone https://github.com/AlexeyAB/darknet \
+  && cd darknet \
+  && sed -i 's/GPU=0/GPU=1/g' Makefile \
+  && sed -i 's/CUDNN=0/CUDNN=1/g' Makefile \
+  && sed -i 's/OPENCV=0/OPENCV=1/g' Makefile \
+  && sed -i 's/LIBSO=0/LIBSO=1/g' Makefile \
+  && make \
+  && wget https://pjreddie.com/media/files/yolov3.weights \
+  && wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights \
   && apt-get clean \
   && apt-get autoclean \
   && apt-get autoremove \
@@ -73,4 +84,3 @@ RUN apt update && apt upgrade -y && \
   && rm -f /var/cache/apt/archives/*.deb \
   && rm -f /var/cache/apt/archives/partial/*.deb \
   && rm -f /var/cache/apt/*.bin
-
