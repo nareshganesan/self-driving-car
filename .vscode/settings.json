@@ -1,5 +1,4 @@
 {
-  // Enable per-language
   "[python]": {
     "editor.formatOnSave": true,
     "editor.insertSpaces": true,
@@ -11,9 +10,11 @@
   "python.pythonPath": "~/.pyenv/versions/udSelfDriving/bin/python3",
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
-  "python.linting.pylintArgs": ["--enable=W0614"], // unused imports or missing class documentations
+  "python.linting.pylintArgs": ["--enable=W0614"],
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "~/.pyenv/versions/udSelfDriving/bin/black",
   "python.formatting.blackArgs": ["--line-length", "88"],
-  "python.sortImports.args": ["-rc", "-sp isort.cfg"]
+  "python.sortImports.args": ["-rc", "-sp isort.cfg"],
+  "python.venvFolders": ["~/.pyenv/versions", "~/.virtualenvs"],
+  "python.venvPath": "~/.pyenv/versions/udSelfDriving"
 }
